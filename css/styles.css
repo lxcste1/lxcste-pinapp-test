@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-collapse {
+    justify-content: end;
+}
+
+.form--title {
+    text-align: center;
+}
+
+.alert {
+    display: none;
+    text-align: center;
+    margin-top: 0.5rem!important;
+}
+
+.btn-submit {
+    width: 100%;
+}
+
+@media screen and (min-width:768px) {
+    .form--container,
+    .client-list--container {
+        padding: 6rem;
+    }
+
+    .form--container div {
+        margin: 0 auto;
+    }
+}
