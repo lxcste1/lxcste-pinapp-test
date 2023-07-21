@@ -47,12 +47,28 @@ async function getClient() {
 
     const querySnapshot = await getDocs(collection(db, "client"));
     querySnapshot.forEach((doc) => {
-        console.log(doc.data())
-        $('#client-info').html(`${doc.data().age}`);
+        const totalAges = doc.data().age;
+
+        const average = getAverageAge(Number(totalAges), totalAges.length)
+        console.log(average)
+        // getAverageAge(Number(totalAges), totalAges.length);
+
+
+        // console.log(getAverageAge(totalAges))
+
+        // $('#client-info').html(`${doc.data().age}`);
     });
 }
 
+function getAverageAge(ages, i) {
+    const arr = [ages]
+
+    // const average = arr.reduce((prev, age) => prev + age, 0) / i;
+    return arr
+}
+
 getClient();
+
 
 
 

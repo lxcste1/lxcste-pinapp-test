@@ -3,10 +3,6 @@ body {
     padding: 0;
 }
 
-.navbar-collapse {
-    justify-content: end;
-}
-
 .form--title {
     text-align: center;
 }
@@ -21,10 +17,18 @@ body {
     width: 100%;
 }
 
+.form--title {
+    padding-top: 0.5rem;
+}
+
 @media screen and (min-width:768px) {
+    .navbar-collapse {
+        justify-content: end;
+    }
+
     .form--container,
     .client-list--container {
-        padding: 6rem;
+        padding: 0 6rem;
     }
 
     .form--container div {
