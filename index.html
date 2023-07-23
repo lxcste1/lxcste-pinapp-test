@@ -13,7 +13,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+        <div class="container container-fluid">
             <a class="navbar-brand" href="#">PinApp | Test</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,44 +22,63 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/src/index.html">Creación de clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./pages/stats.html">Lista de clientes</a>
+                        <a class="btn btn-success" href="../pages/create.html">Crear</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container form--container">
-        <div class="row col-xs-12 col-md-6">
-            <div class="form--title">
-                <h1>Creación de cliente</h1>
+    <div class="container client-list--container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="client-list--title">Lista de clientes</h1>
             </div>
-            <form id="client-form">
-                <div class="mb-3">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="input-name">
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6 col-xs-12 p-1">
+                <div class="card">
+                    <div class="card-body average--card">
+                        <div class="col-8">
+                            <div class="text-gray-100 fw-bold fs-2 mb-2">           
+                                <span id="client-average"></span>       
+                            </div>
+                            <div class="fw-semibold text-gray-100">
+                                Promedio de edad
+                            </div>
+                        </div>
+                        <div class="col-4 card-icon">
+                            <img src="../img/average-icon.png" alt="Icono de promedio de edad" width="64" height="64">
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="input-lastname">
+            </div>
+            <div class="col-md-6 col-xs-12 p-1">
+                <div class="card">
+                    <div class="card-body standard-deviation--card">
+                        <div class="col-8">
+                            <div class="text-gray-100 fw-bold fs-2 mb-2">           
+                                <span id="client-standard-deviation"></span>       
+                            </div>
+                            <div class="fw-semibold text-gray-100">
+                                Desviación estándar
+                            </div>
+                        </div>
+                        <div class="col-4 card-icon">
+                            <img src="../img/standard-deviation-icon.png" alt="Icono de promedio de edad" width="64" height="64">
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Edad</label>
-                    <input type="number" class="form-control" id="input-age">
+            </div>
+        </div>
+        <div class="row">
+            <div class="client-list--columns">
+                <div class="col-12 client-list">
+                    <div id="client-list" class="row"></div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" id="input-birthday">
-                </div>
-                <button type="submit" class="btn btn-primary btn-submit">Enviar</button>
-                <div id="form-success" class="alert alert-success" role="alert">¡Cliente creado con éxito!</div>
-                <div id="form-danger" class="alert alert-danger" role="alert">Error al intentar crear el cliente.
-                    Reintente</div>
-            </form>
+            </div>
         </div>
     </div>
+
 </body>
 
 <script type="module" src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
@@ -69,6 +88,7 @@
     crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script type="module" src="./js/initFirebase.js"></script>
 <script type="module" src="./js/index.js"></script>
 
 </html>
