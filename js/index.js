@@ -11,7 +11,6 @@ const firebaseConfig = {
     appId: "1:271191346234:web:bf483224ca9e8c6d14f903"
 };
 
-// Initialize firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -44,27 +43,58 @@ function submitForm(e) {
 }
 
 async function getClient() {
+    const clients = await getDocs(collection(db, "client"));
+    const listClients = clients.docs.map((list) => list.data());
+    const ages = clients.docs.map((client) => Number(client.data().age));
 
-    const querySnapshot = await getDocs(collection(db, "client"));
-    querySnapshot.forEach((doc) => {
-        const totalAges = doc.data().age;
+    const average = getAverageAge(ages)
+    const standarDeviation = getStandarDeviation(ages, average)
 
-        const average = getAverageAge(Number(totalAges), totalAges.length)
-        console.log(average)
-        // getAverageAge(Number(totalAges), totalAges.length);
+    $('#client-average').html(average);
+    $('#client-standard-deviation').html(standarDeviation);
 
-
-        // console.log(getAverageAge(totalAges))
-
-        // $('#client-info').html(`${doc.data().age}`);
-    });
+    listClients.forEach((item) => {
+        $('#client-list').append(`
+            <div class="col-md-3 col-xs-6 p-1">
+                <div class="card">
+                    <div class="card-image--container">
+                        <img
+                            src="../img/profile-image.png" 
+                            alt="Imagen de perfil de ${item.name} ${item.lastname}"
+                            width="150"
+                            height="150" />               
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${item.name} ${item.lastname}</h5>
+                        <p class="card-text">Nacimiento: ${item.birthday}</p>
+                        <p class="card-text">${item.age} años</p>
+                    </div>
+                </div>
+            </div>            
+        `)
+    })
 }
 
-function getAverageAge(ages, i) {
-    const arr = [ages]
+function getAverageAge(ages) {
+    const averageCount = ages.reduce((prev, age) => prev + age, 0) / ages.length;
+    
+    return averageCount.toFixed(2);
+}
 
-    // const average = arr.reduce((prev, age) => prev + age, 0) / i;
-    return arr
+function getStandarDeviation(ages, average) {
+    const getNominator = ages.map((i) => {
+        const sumAges = i - average;
+        const powAges = Math.pow(sumAges, 2);
+
+        return powAges;
+    })
+
+    const sumNominatorValues = getNominator.reduce((prev, age) => prev + age, 0);
+    const getDenominator = ages.length - 1;
+    
+    const standarDeviation = Math.sqrt(sumNominatorValues / getDenominator);
+
+    return standarDeviation.toFixed(2);
 }
 
 getClient();
